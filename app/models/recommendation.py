@@ -1,10 +1,13 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Text
+from sqlalchemy import Column, Integer, String, Text, DateTime
 from app.db.database import Base
+from datetime import datetime
 
 class Recommendation(Base):
     __tablename__ = "recommendations"
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"))
-    content = Column(Text)
-    category = Column(String)
+    title = Column(String(255), nullable=False)
+    description = Column(Text, nullable=False)
+    category = Column(String(100))
+    severity = Column(Integer, default=1)
+    created_at = Column(DateTime, default=datetime.utcnow)
